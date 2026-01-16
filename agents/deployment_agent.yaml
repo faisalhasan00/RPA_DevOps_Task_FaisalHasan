@@ -1,0 +1,7 @@
+decision_inputs:
+  test_passed: true
+  manual_approval: true
+  infra_health: healthy
+
+decision:
+  deploy_to_prod: true

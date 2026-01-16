@@ -1,0 +1,7 @@
+checks:
+  - vm_status
+  - cpu_usage
+  - storage_health
+
+recommendation:
+  action: no_action_required

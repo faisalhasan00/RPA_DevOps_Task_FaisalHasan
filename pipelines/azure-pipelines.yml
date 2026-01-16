@@ -1,0 +1,48 @@
+trigger:
+- main
+
+stages:
+- stage: Build
+  jobs:
+  - job: Validate
+    steps:
+    - script: |
+        echo "Validating bot package"
+        bash scripts/validate_bot.sh
+      displayName: Bot Validation
+
+- stage: Deploy_Dev
+  dependsOn: Build
+  jobs:
+  - job: Dev
+    steps:
+    - script: bash scripts/deploy_bot.sh dev
+
+- stage: Deploy_Test
+  dependsOn: Deploy_Dev
+  jobs:
+  - job: Test
+    steps:
+    - script: bash scripts/deploy_bot.sh test
+
+- stage: Deploy_Prod
+  dependsOn: Deploy_Test
+  jobs:
+  - job: Approval
+    pool: server
+    steps:
+    - task: ManualValidation@0
+      inputs:
+        instructions: Approve production deployment
+
+  - job: Prod
+    dependsOn: Approval
+    steps:
+    - script: bash scripts/deploy_bot.sh prod
+
+- stage: Rollback
+  condition: failed()
+  jobs:
+  - job: Rollback
+    steps:
+    - script: bash scripts/rollback_bot.sh

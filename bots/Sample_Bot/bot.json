@@ -1,0 +1,11 @@
+{
+  "botName": "Sample_RPA_Bot",
+  "version": "1.0.0",
+  "description": "Sample Automation Anywhere bot for CI/CD simulation",
+  "steps": [
+    "Open Application",
+    "Login",
+    "Process Data",
+    "Logout"
+  ]
+}
