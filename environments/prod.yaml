@@ -1,0 +1,3 @@
+name: production
+description: Production environment for live bot operations
+type: prod

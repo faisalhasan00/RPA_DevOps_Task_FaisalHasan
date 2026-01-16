@@ -1,0 +1,3 @@
+name: testing
+description: Test environment for integration testing and QA validation
+type: test
